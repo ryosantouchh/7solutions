@@ -9,10 +9,10 @@ import (
 
 func TestBeefSummary(t *testing.T) {
 	expectedCount := map[string]int{
-		"Beef":    2,
-		"Pork":    1,
-		"Sirloin": 1,
+		"beef":    2,
 		"loin":    1,
+		"pork":    1,
+		"sirloin": 1,
 	}
 
 	beefSummary := domain.BeefSummary{Beef: expectedCount}
@@ -24,7 +24,7 @@ func TestBeefSummary(t *testing.T) {
 
 	jsonString := string(data)
 
-	expectedJSON := `{"beef":{"Beef":2,"Pork":1,"Sirloin":1,"loin":1}}`
+	expectedJSON := `{"beef":{"beef":2,"loin":1,"pork":1,"sirloin":1}}`
 	if jsonString != expectedJSON {
 		t.Errorf("Expected JSON: %s \n but got: %s", expectedJSON, jsonString)
 	}

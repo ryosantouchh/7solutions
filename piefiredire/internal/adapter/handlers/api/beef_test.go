@@ -32,10 +32,10 @@ func (m *MockBeefService) Get() (string, error) {
 
 func TestHandlerGetSummary(t *testing.T) {
 	expectedCount := map[string]int{
-		"Pork":    1,
-		"Beef":    2,
+		"pork":    1,
+		"beef":    2,
 		"loin":    1,
-		"Sirloin": 1,
+		"sirloin": 1,
 	}
 
 	recorder := httptest.NewRecorder()

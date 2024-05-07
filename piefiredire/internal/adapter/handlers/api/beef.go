@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"regexp"
+	"strings"
 
 	"github.com/ryosantouchh/7solutions/piefiredire/internal/core/domain"
 	"github.com/ryosantouchh/7solutions/piefiredire/internal/core/ports"
@@ -31,10 +32,11 @@ func (b *BeefHandler) GetSummary(ctx ports.HTTPContext) {
 
 	var beefCount map[string]int = make(map[string]int)
 	for i := range matchWords {
-		if _, ok := beefCount[matchWords[i]]; ok {
-			beefCount[matchWords[i]] += 1
+		word := strings.ToLower(matchWords[i])
+		if _, ok := beefCount[word]; ok {
+			beefCount[word] += 1
 		} else {
-			beefCount[matchWords[i]] = 1
+			beefCount[word] = 1
 		}
 	}
 
