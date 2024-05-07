@@ -30,7 +30,7 @@ func (b *BeefHandler) GetSummary(ctx ports.HTTPContext) {
 	regX := regexp.MustCompile(`[a-zA-Z0-9_]+`)
 	matchWords := regX.FindAllString(beefString, -1)
 
-	var beefCount map[string]int = make(map[string]int)
+	var beefCount map[string]int32 = make(map[string]int32)
 	for i := range matchWords {
 		word := strings.ToLower(matchWords[i])
 		if _, ok := beefCount[word]; ok {
