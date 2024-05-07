@@ -18,6 +18,9 @@ func NewBeefRepository(db interface{}) *BeefRepository {
 
 // I write this function in the way like we query the data from some sites
 func (b *BeefRepository) Get() (string, error) {
+	// Please Read : if we wanna do like using the gorm, we can do like this
+	// b.db.<Find or Whatever methods in gorm> - and return result out of function krub
+
 	endpoint := "https://baconipsum.com/api/?type=meat-and-filler&paras=99&format=text"
 
 	response, err := http.Get(endpoint)
