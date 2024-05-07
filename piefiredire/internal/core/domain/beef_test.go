@@ -8,7 +8,7 @@ import (
 )
 
 func TestBeefSummary(t *testing.T) {
-	expectedCount := map[string]int{
+	expectedCount := map[string]int32{
 		"beef":    2,
 		"loin":    1,
 		"pork":    1,
