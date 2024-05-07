@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/ryosantouchh/7solutions/piefiredire";
+
+message BeefSummary {
+  map<string, int32> beef = 1;
+}
+
+message Empty {}
+
+service BeefService {
+  rpc GetSummary(Empty) returns (BeefSummary) {}
+}
