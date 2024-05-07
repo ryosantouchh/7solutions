@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"regexp"
+	"strings"
 
 	"github.com/ryosantouchh/7solutions/piefiredire/internal/core/domain"
 	"github.com/ryosantouchh/7solutions/piefiredire/internal/core/ports"
@@ -10,15 +11,15 @@ import (
 
 type BeefHandler struct {
 	// TODO : injected ORM / DB here - eg.) import from storage/gorm.go
-	db ports.BeefService
+	store ports.BeefService
 }
 
-func NewBeefHandler(db ports.BeefService) *BeefHandler {
-	return &BeefHandler{db: db}
+func NewBeefHandler(service ports.BeefService) *BeefHandler {
+	return &BeefHandler{store: service}
 }
 
 func (b *BeefHandler) GetSummary(ctx ports.HTTPContext) {
-	beefString, err := b.db.Get()
+	beefString, err := b.store.Get()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, domain.HTTPResponse{
 			"Error BeefHandler Get ::": err.Error(),
@@ -31,10 +32,11 @@ func (b *BeefHandler) GetSummary(ctx ports.HTTPContext) {
 
 	var beefCount map[string]int = make(map[string]int)
 	for i := range matchWords {
-		if _, ok := beefCount[matchWords[i]]; ok {
-			beefCount[matchWords[i]] += 1
+		word := strings.ToLower(matchWords[i])
+		if _, ok := beefCount[word]; ok {
+			beefCount[word] += 1
 		} else {
-			beefCount[matchWords[i]] = 1
+			beefCount[word] = 1
 		}
 	}
 
