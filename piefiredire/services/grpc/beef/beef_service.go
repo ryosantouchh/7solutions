@@ -13,13 +13,16 @@ import (
 
 type BeefgRPCServer struct {
 	store ports.BeefService
+
+	// embed for implement the BeefServiceServer
+	UnimplementedBeefServiceServer
 }
 
 func NewBeefgRPCServer(service ports.BeefService) *BeefgRPCServer {
 	return &BeefgRPCServer{store: service}
 }
 
-func (s *BeefgRPCServer) mustEmbedUnimplementedBeefServiceServer() {}
+// func (s *BeefgRPCServer) mustEmbedUnimplementedBeefServiceServer() {}
 
 func (s *BeefgRPCServer) GetSummary(ctx context.Context, empty *Empty) (*BeefSummary, error) {
 	beefString, err := s.store.Get()

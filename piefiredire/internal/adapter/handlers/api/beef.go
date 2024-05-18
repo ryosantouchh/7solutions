@@ -11,15 +11,15 @@ import (
 
 type BeefHandler struct {
 	// TODO : injected ORM / DB here - eg.) import from storage/gorm.go
-	store ports.BeefService
+	service ports.BeefService
 }
 
 func NewBeefHandler(service ports.BeefService) *BeefHandler {
-	return &BeefHandler{store: service}
+	return &BeefHandler{service: service}
 }
 
 func (b *BeefHandler) GetSummary(ctx ports.HTTPContext) {
-	beefString, err := b.store.Get()
+	beefString, err := b.service.Get()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, domain.HTTPResponse{
 			"Error BeefHandler Get ::": err.Error(),
